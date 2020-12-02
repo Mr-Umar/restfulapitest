@@ -3,13 +3,11 @@ package com.example.restfulapi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.restfulapi.restapi.Api;
-import com.example.restfulapi.restapi.helperuser;
+import com.example.restfulapi.restapi.Apiget;
+import com.example.restfulapi.restapi.modelclass;
 
 import java.util.List;
 
@@ -36,30 +34,33 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        Api myhelperclass = retrofit.create(Api.class);
-        Call<List<helperuser>> call = myhelperclass.getusuer();
+        Apiget myhelperclass = retrofit.create(Apiget.class);
 
-        call.enqueue(new Callback<List<helperuser>>() {
+        Call<List<modelclass>> call = myhelperclass.getusuer();
+
+        call.enqueue(new Callback<List<modelclass>>() {
             @Override
-            public void onResponse(Call<List<helperuser>> call, Response<List<helperuser>> response) {
+            public void onResponse(Call<List<modelclass>> call, Response<List<modelclass>> response) {
                 if (!response.isSuccessful()) {
                     textViewresult.setText("Code: " + response.code());
                     return;
                 }
-                List<helperuser> helperuserList = response.body();
-                for (helperuser user : helperuserList)
+                List<modelclass> modelclassList = response.body();
+
+
+                for (modelclass user : modelclassList)
                 {
                     String contenet = "";
                     contenet += "Name:" + user.getName() + "\n";
                     contenet += "RealName:" + user.getRealname() + "\n";
                     contenet += "Bio:" + user.getBio() + "\n";
-                    contenet += "Image:" + user.getFirstappearance() + "\n\n";
+                    contenet += "Image:" + user.getImageurl() + "\n\n";
                     textViewresult.append(contenet);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<helperuser>> call, Throwable t) {
+            public void onFailure(Call<List<modelclass>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }

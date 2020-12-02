@@ -2,7 +2,7 @@ package com.example.restfulapi.restapi;
 
 
 
-public class helperuser {
+public class modelclass {
 
     private String name;
     private String realname;

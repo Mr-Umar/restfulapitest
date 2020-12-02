@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
-public interface Api
+public interface Apiget
 {
     String Baseurl="https://simplifiedcoding.net/demos/";
     String feed="marvel";
@@ -17,6 +17,7 @@ public interface Api
             .build();
 
    @GET(feed)
-    Call<List<helperuser>>getusuer();
+
+    Call<List<modelclass>>getusuer();
 
 }
